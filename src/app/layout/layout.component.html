@@ -1,0 +1,42 @@
+<mat-toolbar>
+    <button (click)="sidenav.toggle()" mat-icon-button class="example-icon"
+        aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>My App</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon>share</mat-icon>
+    </button>
+</mat-toolbar>
+<mat-sidenav-container [ngStyle]="{'height':'500px'}">
+    <mat-sidenav #sidenav mode="side" close-on-click="#sidenav">
+
+        <mat-nav-list>
+            @for (link of list; track link) {
+            <a mat-list-item [routerLink]="link.path" routerLinkActive="active-link"
+                [routerLinkActiveOptions]="{exact: true}" [activated]="link.isActive">
+                <mat-icon matListItemIcon>info</mat-icon>
+                <span matListItemTitle>{{link.name}}</span>
+
+            </a>
+
+            }
+
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+@if(isSpinnerEnabled){
+<div  class="overlay-spinner">
+    <div class="center-spinner">
+        <mat-progress-spinner mode="indeterminate">
+        </mat-progress-spinner>
+    </div>
+</div>
+}

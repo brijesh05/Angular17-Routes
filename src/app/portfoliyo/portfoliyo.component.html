@@ -1,0 +1,19 @@
+<mat-card>
+    <mat-card-header  class="mat-elevation-z4">
+        <app-portfoliyo-header></app-portfoliyo-header>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+        <nav mat-tab-nav-bar  [tabPanel]="tabPanel">
+            @for (link of links; track link) {
+              <a mat-tab-link
+                [routerLink]="link"
+                (click)="activeLink = link"
+                [active]="activeLink == link"> {{link}} </a>
+            }
+          </nav>
+
+        <router-outlet></router-outlet>
+    </mat-card-content>
+  </mat-card>
+
