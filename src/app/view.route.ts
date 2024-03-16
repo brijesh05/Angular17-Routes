@@ -9,6 +9,7 @@ import { DataComponent } from './tga/data/data.component';
 export const routesView: Routes = [
   {
     path: ':id', component: ViewDataComponent,
+    data:{'dataId':'90'},
     children: [
       { path: '', redirectTo: 'tga', pathMatch: 'full' },
       {

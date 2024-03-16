@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -14,4 +14,14 @@ export class TgaComponent {
 
   links:string[]=['details','data'];
   activeLink:string=this.links[0];
+  @Input()
+  set id(id:string){
+      console.log(id);
+  }
+
+  @Input()
+  set dataId(dataId:string){
+      console.log(dataId);
+  }
+
 }
