@@ -1,1 +1,15 @@
 <p>detail works!</p>
+<form [formGroup]="form">
+
+	<input placeholder="Email" type="email" formControlName="name" >
+    @if (form.controls['name'].hasError('server') && form.controls['name'].untouched) {
+        <div>server error</div>
+    }
+    @if (form.controls['name'].hasError('email') && (form.controls['name'].touched||form.controls['name'].dirty)) {
+        <div>email is not valid</div>
+    }
+
+
+<button (click)="trigger(val=!val)">click</button>
+<button (click)="serverSideError()">submit</button>
+</form>

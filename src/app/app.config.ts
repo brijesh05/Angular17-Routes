@@ -1,5 +1,5 @@
-import { ApplicationConfig, EnvironmentInjector } from '@angular/core';
-import { ROUTER_CONFIGURATION, RouteReuseStrategy, provideRouter, withComponentInputBinding, withHashLocation, withRouterConfig } from '@angular/router';
+import { ApplicationConfig } from '@angular/core';
+import { provideRouter, withComponentInputBinding, withHashLocation, withRouterConfig } from '@angular/router';
 
 import { routes } from './app.routes';
 import { APP_BASE_HREF } from '@angular/common';
