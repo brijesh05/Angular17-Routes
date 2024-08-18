@@ -3,6 +3,12 @@
         <mat-card-title>ViewData</mat-card-title>
     </mat-card-header>
     <mat-card-content>
+      <mat-grid-list cols="2" rowHeight="100px" >
+        <mat-grid-tile>{{data().dataView.var1}}</mat-grid-tile>
+        <mat-grid-tile>{{data().dataView.var2}}</mat-grid-tile>
+        <mat-grid-tile>{{data().dataView.var3}}</mat-grid-tile>
+        <mat-grid-tile>{{data().dataView.var4}}</mat-grid-tile>
+      </mat-grid-list>
         <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
         <nav mat-tab-nav-bar  [tabPanel]="tabPanel">
             @for (link of links; track link) {

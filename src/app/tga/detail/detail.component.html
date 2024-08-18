@@ -1,14 +1,17 @@
 <p>detail works!</p>
 <form [formGroup]="form">
 
-	<input placeholder="Email" type="email" formControlName="name" >
-    @if (form.controls['name'].hasError('server') && form.controls['name'].untouched) {
+	<input placeholder="Email" type="email" formControlName="var1" >
+    @if (form.controls['var1'].hasError('server') && form.controls['var1'].untouched) {
         <div>server error</div>
     }
-    @if (form.controls['name'].hasError('email') && (form.controls['name'].touched||form.controls['name'].dirty)) {
+    @if (form.controls['var1'].hasError('email') && (form.controls['var1'].touched||form.controls['var1'].dirty)) {
         <div>email is not valid</div>
     }
 
+    <input placeholder="var2" type="text" formControlName="var2" >
+    <input placeholder="var3" type="text" formControlName="var3" >
+    <input placeholder="var4" type="text" formControlName="var4" >
 
 <button (click)="trigger(val=!val)">click</button>
 <button (click)="serverSideError()">submit</button>

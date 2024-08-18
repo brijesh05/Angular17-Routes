@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
-import {  FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, ElementRef, inject } from '@angular/core';
+import {  FormControl, FormControlState, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { DataServiceService } from '../../data-service.service';
 
 @Component({
   selector: 'app-detail',
@@ -8,12 +9,13 @@ import { Subscription } from 'rxjs';
   imports: [ReactiveFormsModule],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.scss',
-  changeDetection:ChangeDetectionStrategy.OnPush
+  changeDetection:ChangeDetectionStrategy.Default
 })
 export class DetailComponent {
   formValueSub!:Subscription;
   form!:FormGroup;
   val!:boolean;
+  dataSerive=inject(DataServiceService)
   element!:ElementRef<HTMLElement>
   constructor(element:ElementRef<HTMLElement>){
     this.element=element;
@@ -23,8 +25,10 @@ ngOnInit(): void {
   //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
   //Add 'implements OnInit' to the class. 
   this.form=new FormGroup({
-    name:new FormControl({value:'',disabled:false},{validators:[Validators.email],updateOn:'change'})
-
+    var1:new FormControl({value:'',disabled:false},{validators:[Validators.email]}),
+    var2:new FormControl({value:'',disabled:false},{validators:[Validators.required]}),
+    var3:new FormControl({value:'',disabled:false},{validators:[Validators.required]}),
+    var4:new FormControl({value:'',disabled:false})
   });
   
   
@@ -45,27 +49,33 @@ ngOnInit(): void {
 
   serverSideError(){
     if(this.form.valid){
-    this.form.get('name')?.markAsUntouched();
-    this.form.get('name')?.setErrors({server:true});
+    this.form.get('var1')?.markAsUntouched();
+    this.form.get('var1')?.setErrors({server:true});
     }
+    this.dataSerive.set();
   }
 
 trigger(b:boolean){
-  this.markReadOnly({arg0:'name',arg1:b});
+  this.markReadOnly({arg0:'var1',arg1:b});
 }
 
-handle(x: any): void {
-  this.form.valid;
-  if(this.form.valid){
-    console.info(x);
-  }
+handle(y:boolean,x: any): void {
+  console.info(y);
+  this.dataSerive.updateValue(this.form.value);
+
   
  }
 
  ngAfterViewInit(): void {
   //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
   //Add 'implements AfterViewInit' to the class.
-  this.formValueSub=this.form.valueChanges.subscribe(x=>this.handle(x));
+  this.formValueSub=this.form.
+  statusChanges.
+  subscribe((x)=>{
+      if('VALID'===x){
+        this.handle('VALID'===x,this.form.value);
+      }
+  });
   
  }
 
